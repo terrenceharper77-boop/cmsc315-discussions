@@ -34,7 +34,6 @@ def linear_search(lst, target):
     return -1
 
 
-
 def binary_search(lst, target):
     """
     TODO (Student):
