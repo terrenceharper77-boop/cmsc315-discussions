@@ -17,14 +17,16 @@ class Node:
         # TODO (Student):
         # Store the node's value and initialize references
         # to the left and right child nodes.
-        pass
+        self.value = value  #the data  this node holds
+        self.left = None    # Reference the left child (initially none)
+        self.right = None   # Reference th right child (initially None)
 
 
 class BST:
     def __init__(self):
         # TODO (Student):
         # Initialize an empty Binary Search Tree.
-        pass
+        self.root = None    # empty tree
 
     def insert(self, value):
         """
@@ -37,7 +39,12 @@ class BST:
           whether a value is smaller or larger than the
           current node.
         """
-        pass
+        # start at the root, the helper method returns it back so it can be stored.
+        # if root is none, helper creates the first node and returns it
+        self.root = self._insert_recursive(self.root, value)
+
+        # insertion compares the value to each node so it goes left when smaller and right when larger,
+        # which keeps the BST ordering rule true and lets searches skip half the tree at each step.
 
     def _insert_recursive(self, node, value):
         """
@@ -50,7 +57,20 @@ class BST:
         - Insert larger values into the right subtree.
         - Return the updated node reference.
         """
-        pass
+        # create new node and give it to the parent node
+        if node is None:
+            return Node(value)
+        # to obey BST rules: the nodes left subtree is larger than it and the nodes
+        # right subtree is larger than it. if the new value is larger or smaller tells it which side
+        # it must go on.
+        if value < node.value:
+            # smaller than value: attach the result to the left
+            node.Left = self._insert_recursive(node.left, value)
+        elif value > node.value:
+            # Larger: athhatch the result to the right
+            node.right = self._insert_recursive(node.right, value)
+
+        return node
 
     def search(self, value):
         """
@@ -62,6 +82,10 @@ class BST:
         - Return False if not found.
         - Add comments explaining why BST search is often
           more efficient than linear search.
+        """
+        """Bst search is often faster than a linear search because linear searches check items one at 
+        time, through all the values, 0(n).a bst tree on the other had, each comparison directs to which side 
+        the value must be on, skipping the other subtree.
         """
         pass
 
